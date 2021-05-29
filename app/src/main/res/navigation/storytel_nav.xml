@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/storytel_nav"
+    app:startDestination="@id/postsFragment">
+
+    <fragment
+        android:id="@+id/postsFragment"
+        android:name="ir.alizeyn.storytel.fragments.post.PostsFragment"
+        android:label="Storytel"
+        tools:layout="@layout/fragment_posts">
+        <action
+            android:id="@+id/action_postsFragment_to_commentsFragment"
+            app:destination="@id/commentsFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
+    </fragment>
+    <fragment
+        android:id="@+id/commentsFragment"
+        android:name="ir.alizeyn.storytel.fragments.comment.CommentsFragment"
+        android:label="Comments"
+        tools:layout="@layout/fragment_comments">
+        <action
+            android:id="@+id/action_commentsFragment_to_postsFragment"
+            app:destination="@id/postsFragment"
+            app:enterAnim="@anim/to_right"
+            app:exitAnim="@anim/from_left" />
+    </fragment>
+</navigation>
