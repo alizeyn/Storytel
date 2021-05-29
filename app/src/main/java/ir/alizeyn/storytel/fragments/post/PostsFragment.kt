@@ -3,6 +3,7 @@ package ir.alizeyn.storytel.fragments.post
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import ir.alizeyn.storytel.R
 import ir.alizeyn.storytel.databinding.FragmentPostsBinding
 
@@ -15,7 +16,7 @@ class PostsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
+
         _binding = FragmentPostsBinding.inflate(inflater, container, false)
         val view = binding.root
         setHasOptionsMenu(true)
