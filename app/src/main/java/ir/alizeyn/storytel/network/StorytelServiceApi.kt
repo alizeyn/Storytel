@@ -10,16 +10,14 @@ interface StorytelServiceApi {
 
     @GET("/posts")
     suspend fun getPosts(
-
-    ): Response<List<Post>>
+    ): List<Post>
 
     @GET("/photos")
     suspend fun getPhotos(
-
-    ): Response<List<Photo>>
+    ): List<Photo>
 
     @GET("/posts/{id}/comments")
     suspend fun getComments(
         @Path("id") id: Int
-    ): Response<List<Comment>>
+    ): List<Comment>
 }

@@ -3,7 +3,7 @@ package ir.alizeyn.storytel.di
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.components.SingletonComponent
 import ir.alizeyn.storytel.network.BaseUrl.Companion.BASE_URL
 import ir.alizeyn.storytel.network.StorytelServiceApi
 import okhttp3.OkHttpClient
@@ -13,12 +13,12 @@ import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
 @Module
-@InstallIn(ActivityComponent::class)
+@InstallIn(SingletonComponent::class)
 object NetworkModule {
 
     @Singleton
     @Provides
-    fun provideHttpClient() : OkHttpClient {
+    fun provideHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .readTimeout(15, TimeUnit.SECONDS)
             .connectTimeout(15, TimeUnit.SECONDS)

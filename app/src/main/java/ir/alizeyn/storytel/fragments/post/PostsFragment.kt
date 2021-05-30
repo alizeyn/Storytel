@@ -3,11 +3,16 @@ package ir.alizeyn.storytel.fragments.post
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
+import androidx.fragment.app.viewModels
+import dagger.hilt.android.AndroidEntryPoint
 import ir.alizeyn.storytel.R
 import ir.alizeyn.storytel.databinding.FragmentPostsBinding
+import ir.alizeyn.storytel.viewmodel.PostsViewModel
 
+@AndroidEntryPoint
 class PostsFragment : Fragment() {
+
+    private val postsViewModel: PostsViewModel by viewModels()
 
     private var _binding: FragmentPostsBinding? = null
     private val binding get() = _binding!!
@@ -20,6 +25,7 @@ class PostsFragment : Fragment() {
         _binding = FragmentPostsBinding.inflate(inflater, container, false)
         val view = binding.root
         setHasOptionsMenu(true)
+
         return view
     }
 
