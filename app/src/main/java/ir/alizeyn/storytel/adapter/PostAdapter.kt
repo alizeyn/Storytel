@@ -3,6 +3,7 @@ package ir.alizeyn.storytel.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import ir.alizeyn.storytel.data.model.Post
 import ir.alizeyn.storytel.databinding.ItemPostBinding
 
@@ -33,6 +34,7 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
         fun bind(post: Post) {
             binding.postBody.text = post.body
             binding.postTitle.text = post.title
+            binding.postThumbnail.load("https://via.placeholder.com/150/900672")
         }
 
         companion object {
