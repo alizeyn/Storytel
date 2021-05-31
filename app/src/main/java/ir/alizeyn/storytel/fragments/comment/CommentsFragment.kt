@@ -5,11 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import ir.alizeyn.storytel.databinding.FragmentPostsBinding
+import androidx.navigation.fragment.navArgs
+import coil.load
+import ir.alizeyn.storytel.data.model.domain.StorytelPost
+import ir.alizeyn.storytel.databinding.FragmentCommentsBinding
 
 class CommentsFragment : Fragment() {
 
-    private var _binding: FragmentPostsBinding? = null
+    private val args by navArgs<CommentsFragmentArgs>()
+
+    private var _binding: FragmentCommentsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -17,7 +22,10 @@ class CommentsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        _binding = FragmentPostsBinding.inflate(inflater, container, false)
+        _binding = FragmentCommentsBinding.inflate(inflater, container, false)
+        val post: StorytelPost = args.currentPost
+        binding.postImage.load(post.imageUrl)
+        binding.postTitle.text = post.title
         return binding.root
     }
 

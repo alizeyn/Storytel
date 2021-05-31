@@ -31,8 +31,8 @@ class PostRepositoryImpl @Inject constructor(
     private fun mapPosts(posts: List<Post>, photos: List<Photo>): List<StorytelPost> {
         return posts.map {
             val photoItemIndex = photos.indices.random()
-            val thumbnailUrl = photos[photoItemIndex].thumbnailUrl
-            postDataMapper.map(DataPost(it, thumbnailUrl))
+            val photo: Photo = photos[photoItemIndex]
+            postDataMapper.map(DataPost(it, photo.thumbnailUrl, photo.url))
         }
     }
 }
