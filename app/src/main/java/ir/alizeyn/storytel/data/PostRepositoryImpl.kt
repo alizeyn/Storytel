@@ -1,7 +1,5 @@
-package ir.alizeyn.storytel.data.model
+package ir.alizeyn.storytel.data
 
-import dagger.hilt.android.scopes.ActivityRetainedScoped
-import ir.alizeyn.storytel.data.Mapper
 import ir.alizeyn.storytel.data.model.data.DataPost
 import ir.alizeyn.storytel.data.model.domain.StorytelPost
 import ir.alizeyn.storytel.data.model.network.Comment
@@ -12,19 +10,19 @@ import ir.alizeyn.storytel.network.Response
 import ir.alizeyn.storytel.network.StorytelServiceApi
 import javax.inject.Inject
 
-@ActivityRetainedScoped
-class Repository @Inject constructor(
+class PostRepositoryImpl @Inject constructor(
     private val storytelApi: StorytelServiceApi,
     private val postDataMapper: Mapper<DataPost, StorytelPost>
-) {
+): PostRepository {
 
-    suspend fun getPosts(): Response<List<StorytelPost>> {
+    override suspend fun getPosts(): Response<List<StorytelPost>> {
         return Call.safeCall {
+            //todo use flow
             mapPosts(storytelApi.getPosts(), storytelApi.getPhotos())
         }
     }
 
-    suspend fun getComments(postId: Int): Response<List<Comment>> {
+    override suspend fun getComments(postId: Int): Response<List<Comment>> {
         return Call.safeCall {
             storytelApi.getComments(postId)
         }

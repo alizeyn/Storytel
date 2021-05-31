@@ -7,7 +7,7 @@ import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import ir.alizeyn.storytel.data.model.Repository
+import ir.alizeyn.storytel.data.PostRepository
 import ir.alizeyn.storytel.data.model.domain.StorytelPost
 import ir.alizeyn.storytel.network.Response
 import kotlinx.coroutines.launch
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class PostsViewModel @Inject constructor(
-    private val repository: Repository,
+    private val repository: PostRepository,
     application: Application
 ) : AndroidViewModel(application), LifecycleObserver {
 
