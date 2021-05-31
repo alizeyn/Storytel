@@ -8,5 +8,6 @@ data class StorytelPost(
     var id: Int,
     var title: String,
     var body: String,
-    var thumbnailUrl: String
+    var thumbnailUrl: String,
+    var imageUrl: String
 ): Parcelable

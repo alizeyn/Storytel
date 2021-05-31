@@ -11,6 +11,7 @@ class PostResponseMapper @Inject constructor() : Mapper<DataPost, StorytelPost> 
             input.post.id,
             input.post.title,
             input.post.body,
-            input.thumbnailUrl
+            input.thumbnailUrl,
+            input.imageUrl
         )
 }
