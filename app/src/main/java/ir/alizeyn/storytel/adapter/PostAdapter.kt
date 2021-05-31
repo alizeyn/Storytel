@@ -2,10 +2,12 @@ package ir.alizeyn.storytel.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import ir.alizeyn.storytel.data.model.domain.StorytelPost
 import ir.alizeyn.storytel.databinding.ItemPostBinding
+import ir.alizeyn.storytel.fragments.post.PostsFragmentDirections
 
 class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
 
@@ -16,14 +18,14 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: PostViewHolder, position: Int) {
-        holder.bind(data.get(position))
+        holder.bind(data[position])
     }
 
     override fun getItemCount(): Int {
         return data.size
     }
 
-    public fun updateData(data: List<StorytelPost>) {
+    fun updateData(data: List<StorytelPost>) {
         this@PostAdapter.data = data
         notifyDataSetChanged()
     }
@@ -35,6 +37,10 @@ class PostAdapter : RecyclerView.Adapter<PostAdapter.PostViewHolder>() {
             binding.postBody.text = post.body
             binding.postTitle.text = post.title
             binding.postThumbnail.load(post.thumbnailUrl)
+            binding.root.setOnClickListener {
+                val action = PostsFragmentDirections.actionPostsFragmentToCommentsFragment(post)
+                binding.root.findNavController().navigate(action)
+            }
         }
 
         companion object {

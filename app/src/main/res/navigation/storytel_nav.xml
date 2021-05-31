@@ -28,5 +28,8 @@
             app:destination="@id/postsFragment"
             app:enterAnim="@anim/to_right"
             app:exitAnim="@anim/from_left" />
+        <argument
+            android:name="currentPost"
+            app:argType="ir.alizeyn.storytel.data.model.domain.StorytelPost" />
     </fragment>
 </navigation>
