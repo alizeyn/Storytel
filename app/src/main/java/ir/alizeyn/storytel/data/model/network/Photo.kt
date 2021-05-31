@@ -1,4 +1,4 @@
-package ir.alizeyn.storytel.data.model
+package ir.alizeyn.storytel.data.model.network
 
 data class Photo(
     var albumId: Int,

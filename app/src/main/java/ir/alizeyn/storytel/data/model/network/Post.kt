@@ -1,4 +1,4 @@
-package ir.alizeyn.storytel.data.model
+package ir.alizeyn.storytel.data.model.network
 
 data class Post(
     var userId: Int,

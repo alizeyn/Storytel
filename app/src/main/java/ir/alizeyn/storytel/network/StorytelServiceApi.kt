@@ -1,8 +1,8 @@
 package ir.alizeyn.storytel.network
 
-import ir.alizeyn.storytel.data.model.Comment
-import ir.alizeyn.storytel.data.model.Photo
-import ir.alizeyn.storytel.data.model.Post
+import ir.alizeyn.storytel.data.model.network.Comment
+import ir.alizeyn.storytel.data.model.network.Photo
+import ir.alizeyn.storytel.data.model.network.Post
 import retrofit2.http.GET
 import retrofit2.http.Path
 
