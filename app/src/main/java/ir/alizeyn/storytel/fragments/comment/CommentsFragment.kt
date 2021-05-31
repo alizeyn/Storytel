@@ -42,6 +42,7 @@ class CommentsFragment : Fragment() {
 
         postsViewModel.requestComments(post.id)
         postsViewModel.comments.observe(viewLifecycleOwner, { response ->
+            binding.progressBar.visibility = View.GONE
             when (response) {
                 is Response.Success -> {
                     response.data?.let {
