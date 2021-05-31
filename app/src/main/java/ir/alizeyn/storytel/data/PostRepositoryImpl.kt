@@ -22,9 +22,11 @@ class PostRepositoryImpl @Inject constructor(
         }
     }
 
-    override suspend fun getComments(postId: Int): Response<List<Comment>> {
+    override suspend fun getComments(postId: Int, limit: Int): Response<List<Comment>> {
         return Call.safeCall {
+            //todo handle less comments than limited
             storytelApi.getComments(postId)
+                .subList(0, limit)
         }
     }
 

@@ -32,7 +32,7 @@ class PostsFragment : Fragment() {
         setHasOptionsMenu(true)
         setupRecyclerView()
 
-        postsViewModel.getPosts()
+        postsViewModel.requestPosts()
         postsViewModel.posts.observe(viewLifecycleOwner, { response ->
             when (response) {
                 is Response.Success -> {

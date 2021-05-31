@@ -7,5 +7,5 @@ import ir.alizeyn.storytel.network.Response
 interface PostRepository {
 
     suspend fun getPosts(): Response<List<StorytelPost>>
-    suspend fun getComments(postId: Int): Response<List<Comment>>
+    suspend fun getComments(postId: Int, limit: Int): Response<List<Comment>>
 }
