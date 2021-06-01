@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ir.alizeyn.storytel.R
@@ -19,7 +19,9 @@ class PostsFragment : Fragment() {
     private var _binding: FragmentPostsBinding? = null
     private val binding get() = _binding!!
 
-    private val postsViewModel: PostsViewModel by viewModels()
+    private val postsViewModel: PostsViewModel by navGraphViewModels<PostsViewModel>(R.id.storytel_nav) {
+        defaultViewModelProviderFactory
+    }
     private val adapter: PostAdapter by lazy { PostAdapter() }
 
     override fun onCreateView(
@@ -32,14 +34,17 @@ class PostsFragment : Fragment() {
         setHasOptionsMenu(true)
         setupRecyclerView()
 
-        postsViewModel.requestPosts()
+        if (postsViewModel.posts.value == null) {
+            postsViewModel.requestPosts()
+        }
+
         postsViewModel.posts.observe(viewLifecycleOwner, { response ->
             binding.progressBar.visibility = View.GONE
             when (response) {
                 is Response.Success -> {
                     response.data?.let {
-                        Log.i("TAG", "onCreateView: Updating posts")
-                        adapter.updateData(it) }
+                        adapter.updateData(it)
+                    }
                 }
                 is Response.Error -> {
 
@@ -51,6 +56,7 @@ class PostsFragment : Fragment() {
     }
 
     override fun onDestroyView() {
+        Log.i("PostsFragment", "onDestroyView: ")
         super.onDestroyView()
         _binding = null
     }
