@@ -17,6 +17,9 @@
             app:exitAnim="@anim/to_right"
             app:popEnterAnim="@anim/from_right"
             app:popExitAnim="@anim/to_left" />
+        <action
+            android:id="@+id/action_postsFragment_to_networkErrorFragment"
+            app:destination="@id/networkErrorFragment" />
     </fragment>
     <fragment
         android:id="@+id/commentsFragment"
@@ -31,5 +34,13 @@
         <argument
             android:name="currentPost"
             app:argType="ir.alizeyn.storytel.data.model.domain.StorytelPost" />
+        <action
+            android:id="@+id/action_commentsFragment_to_networkErrorFragment"
+            app:destination="@id/networkErrorFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/networkErrorFragment"
+        android:name="ir.alizeyn.storytel.fragments.NetworkErrorFragment"
+        android:label="fragment_network_error"
+        tools:layout="@layout/fragment_network_error" />
 </navigation>
