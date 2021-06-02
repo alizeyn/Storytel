@@ -2,10 +2,13 @@ package ir.alizeyn.storytel.presentation.network
 
 import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
 import android.view.ViewGroup
 import android.view.Window
+import android.view.WindowManager
 import ir.alizeyn.storytel.R
 import ir.alizeyn.storytel.databinding.DialogNetworkErrorBinding
 
@@ -17,7 +20,15 @@ class NetworkErrorDialog(context: Context, private var retryAction: (() -> Unit)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        requestWindowFeature(Window.FEATURE_NO_TITLE)
+        window?.apply {
+            requestFeature(Window.FEATURE_NO_TITLE)
+            setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+            setBackgroundDrawable(ColorDrawable(Color.rgb(255, 255, 255)))
+            setLayout(
+                WindowManager.LayoutParams.MATCH_PARENT,
+                WindowManager.LayoutParams.MATCH_PARENT
+            )
+        }
         _binding = DialogNetworkErrorBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
