@@ -30,10 +30,12 @@ class CommentAdapter : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() 
     class CommentViewHolder(private val binding: ItemCommentBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(comment: StorytelComment) {
-            binding.comment.text = comment.body
-            binding.name.text = comment.name
-            binding.email.text = comment.email
+        fun bind(storytelComment: StorytelComment) {
+            binding.apply {
+                comment.text = storytelComment.body
+                name.text = storytelComment.name
+                email.text = storytelComment.email
+            }
         }
 
         companion object {

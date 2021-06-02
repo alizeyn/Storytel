@@ -5,7 +5,6 @@ import ir.alizeyn.storytel.data.network.api.Call
 import ir.alizeyn.storytel.data.network.api.StorytelServiceApi
 import ir.alizeyn.storytel.data.network.model.Photo
 import ir.alizeyn.storytel.data.network.model.Post
-import ir.alizeyn.storytel.data.network.model.Response
 import ir.alizeyn.storytel.domain.DataPost
 import ir.alizeyn.storytel.domain.StorytelPost
 import javax.inject.Inject
@@ -15,11 +14,9 @@ class PostRepositoryImpl @Inject constructor(
     private val postDataMapper: Mapper<DataPost, StorytelPost>
 ) : PostRepository {
 
-    override suspend fun getPosts(): Response<List<StorytelPost>> {
-        return Call.safeCall {
-            //todo use flow
-            mapPosts(storytelApi.getPosts(), storytelApi.getPhotos())
-        }
+    override suspend fun getPosts() = Call.safeCall {
+        //todo use flow
+        mapPosts(storytelApi.getPosts(), storytelApi.getPhotos())
     }
 
     private fun mapPosts(posts: List<Post>, photos: List<Photo>): List<StorytelPost> {

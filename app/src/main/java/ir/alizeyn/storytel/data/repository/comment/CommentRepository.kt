@@ -4,5 +4,5 @@ import ir.alizeyn.storytel.data.network.model.Response
 import ir.alizeyn.storytel.domain.StorytelComment
 
 interface CommentRepository {
-    suspend fun getComments(postId: Int, limit: Int): Response<List<StorytelComment>>
+    suspend fun getComments(postId: Int): Response<List<StorytelComment>>
 }

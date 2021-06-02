@@ -19,6 +19,6 @@ class CommentsViewModel @Inject constructor(
     var comments: MutableLiveData<Response<List<StorytelComment>>> = MutableLiveData()
 
     fun requestComments(postId: Int) = viewModelScope.launch {
-        comments.value = repository.getComments(postId, 3)
+        comments.value = repository.getComments(postId)
     }
 }
