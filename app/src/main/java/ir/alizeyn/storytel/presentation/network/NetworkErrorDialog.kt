@@ -9,7 +9,7 @@ import android.view.Window
 import ir.alizeyn.storytel.R
 import ir.alizeyn.storytel.databinding.DialogNetworkErrorBinding
 
-class NetworkErrorDialog(context: Context, private val retryAction: () -> Unit) :
+class NetworkErrorDialog(context: Context, private var retryAction: (() -> Unit)?) :
     Dialog(context, R.style.ThemeOverlay_MaterialComponents_MaterialCalendar_Fullscreen) {
 
     private var _binding: DialogNetworkErrorBinding? = null
@@ -24,7 +24,7 @@ class NetworkErrorDialog(context: Context, private val retryAction: () -> Unit) 
         setCancelable(false)
         setRetryAction {
             showProgressState()
-            retryAction()
+            retryAction?.let { it() }
         }
     }
 
@@ -39,6 +39,7 @@ class NetworkErrorDialog(context: Context, private val retryAction: () -> Unit) 
     override fun onDetachedFromWindow() {
         super.onDetachedFromWindow()
         _binding = null
+        retryAction = null
     }
 
     private fun setRetryAction(retryAction: () -> Unit) {
