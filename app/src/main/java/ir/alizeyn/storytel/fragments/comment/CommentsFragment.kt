@@ -45,11 +45,12 @@ class CommentsFragment : Fragment() {
         val post: StorytelPost = args.currentPost
         binding.postImage.load(post.imageUrl)
         binding.postTitle.text = post.title
+        binding.postBody.text = post.body
 
         postsViewModel.requestComments(post.id)
 
         postsViewModel.comments.observe(viewLifecycleOwner, { response ->
-            binding.progressBar.visibility = View.GONE
+            binding.progressBar.visibility = View.INVISIBLE
             when (response) {
                 is Response.Success -> {
                     response.data?.let {
