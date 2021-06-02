@@ -4,16 +4,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="4dp"
-    android:layout_marginTop="4dp"
-    android:layout_marginRight="4dp"
+    android:layout_marginEnd="16dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginStart="16dp"
     android:layout_marginBottom="8dp"
     android:clickable="true"
     android:focusable="true"
+    app:cardElevation="4dp"
     android:foreground="?selectableItemBackground"
-    android:padding="4dp"
-    app:cardCornerRadius="0dp"
-    app:cardElevation="2dp">
+    android:padding="4dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -37,7 +36,7 @@
             android:textStyle="bold"
             app:layout_constraintBottom_toTopOf="@+id/postBody"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/postThumbnail"
+            app:layout_constraintStart_toEndOf="@+id/imageCardView"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="@tools:sample/cities" />
 
@@ -53,19 +52,27 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/postThumbnail"
+            app:layout_constraintTop_toBottomOf="@+id/imageCardView"
             tools:text="@tools:sample/lorem/random" />
 
-        <ImageView
-            android:id="@+id/postThumbnail"
-            android:layout_width="75dp"
-            android:layout_height="75dp"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/imageCardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
-            android:contentDescription="@string/post_thumbnail"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            app:layout_constraintTop_toTopOf="parent">
+            <ImageView
+                android:id="@+id/postThumbnail"
+                android:layout_width="75dp"
+                android:layout_height="75dp"
+
+                android:contentDescription="@string/post_thumbnail"
+                tools:srcCompat="@tools:sample/avatars" />
+
+        </com.google.android.material.card.MaterialCardView>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

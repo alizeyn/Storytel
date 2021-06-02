@@ -77,7 +77,10 @@ class CommentsFragment : Fragment() {
                     findNavController()
                         .navigate(R.id.action_commentsFragment_to_networkErrorFragment)
 
-                NetworkRetryState.RETRY -> postsViewModel.requestComments(post.id)
+                NetworkRetryState.RETRY -> {
+                    postsViewModel.requestComments(post.id)
+                    binding.postImage.load(post.imageUrl)
+                }
             }
         })
 
