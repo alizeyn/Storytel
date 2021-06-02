@@ -3,12 +3,12 @@ package ir.alizeyn.storytel.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import ir.alizeyn.storytel.data.model.network.Comment
+import ir.alizeyn.storytel.data.model.domain.StorytelComment
 import ir.alizeyn.storytel.databinding.ItemCommentBinding
 
 class CommentAdapter : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() {
 
-    var data: List<Comment> = emptyList()
+    var data: List<StorytelComment> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
         return CommentViewHolder.from(parent)
@@ -22,7 +22,7 @@ class CommentAdapter : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() 
         return data.size
     }
 
-    fun updateData(data: List<Comment>) {
+    fun updateData(data: List<StorytelComment>) {
         this@CommentAdapter.data = data
         notifyDataSetChanged()
     }
@@ -30,7 +30,7 @@ class CommentAdapter : RecyclerView.Adapter<CommentAdapter.CommentViewHolder>() 
     class CommentViewHolder(private val binding: ItemCommentBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(comment: Comment) {
+        fun bind(comment: StorytelComment) {
             binding.comment.text = comment.body
             binding.name.text = comment.name
             binding.email.text = comment.email

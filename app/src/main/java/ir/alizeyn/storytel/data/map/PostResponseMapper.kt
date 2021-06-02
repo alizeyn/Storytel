@@ -1,4 +1,4 @@
-package ir.alizeyn.storytel.data
+package ir.alizeyn.storytel.data.map
 
 import ir.alizeyn.storytel.data.model.data.DataPost
 import ir.alizeyn.storytel.data.model.domain.StorytelPost

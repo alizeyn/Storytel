@@ -1,0 +1,12 @@
+package ir.alizeyn.storytel.data.map
+
+import ir.alizeyn.storytel.data.model.domain.StorytelComment
+import ir.alizeyn.storytel.data.model.network.Comment
+import javax.inject.Inject
+
+class CommentResponseMapper @Inject constructor() : Mapper<Comment, StorytelComment> {
+
+    override fun map(input: Comment): StorytelComment {
+        return StorytelComment(input.postId, input.name, input.email, input.body)
+    }
+}
