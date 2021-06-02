@@ -1,7 +1,6 @@
 package ir.alizeyn.storytel.fragments.comment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -53,29 +52,31 @@ class CommentsFragment : Fragment() {
             binding.progressBar.visibility = View.GONE
             when (response) {
                 is Response.Success -> {
-                    Log.i("TAG", "onCreateView: Response.Success ->")
                     response.data?.let {
                         adapter.updateData(it)
                     }
-                    networkErrorViewModel.retry.value = NetworkRetryState.RESOLVED
+                    networkErrorViewModel.retry.value = NetworkRetryState.NON
                 }
                 is Response.Error -> {
-                    val errorState = networkErrorViewModel.retry.value
-                    Log.i("TAG", "CommentsFragment: Response.Error -> $errorState")
-
-                    if (errorState == null) {
-                        Log.i("TAG", "onCreateView: going to erro fragment")
-                        findNavController().navigate(R.id.action_commentsFragment_to_networkErrorFragment)
-                    } else if (errorState == NetworkRetryState.RETRY) {
-                        networkErrorViewModel.retry.value = NetworkRetryState.IDLE
+                    when (networkErrorViewModel.retry.value) {
+                        NetworkRetryState.ERROR ->
+                            networkErrorViewModel.retry.value = NetworkRetryState.RETRY
+                        NetworkRetryState.RETRY ->
+                            networkErrorViewModel.retry.value = NetworkRetryState.IDLE
+                        else ->
+                            networkErrorViewModel.retry.value = NetworkRetryState.ERROR
                     }
                 }
             }
         })
 
         networkErrorViewModel.retry.observe(viewLifecycleOwner, {
-            if (it == NetworkRetryState.RETRY) {
-                postsViewModel.requestComments(post.id)
+            when (it) {
+                NetworkRetryState.ERROR ->
+                    findNavController()
+                        .navigate(R.id.action_commentsFragment_to_networkErrorFragment)
+
+                NetworkRetryState.RETRY -> postsViewModel.requestComments(post.id)
             }
         })
 

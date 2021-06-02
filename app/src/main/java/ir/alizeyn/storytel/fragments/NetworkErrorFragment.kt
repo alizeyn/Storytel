@@ -31,22 +31,16 @@ class NetworkErrorFragment : DialogFragment() {
         _binding = FragmentNetworkErrorBinding.inflate(inflater, container, false)
 
         binding.retry.setOnClickListener {
-
             networkErrorViewModel.retry.value = NetworkRetryState.RETRY
+            Log.i("TAG", "onCreateView: emit retry")
         }
 
         networkErrorViewModel.retry.observe(viewLifecycleOwner, {
-
             when (it) {
-                NetworkRetryState.RETRY -> {
-                    binding.retryProgress.visibility = View.VISIBLE
-                    binding.retry.isEnabled = false
-                }
-                NetworkRetryState.IDLE -> {
-                    binding.retryProgress.visibility = View.INVISIBLE
-                    binding.retry.isEnabled = true
-                }
-                NetworkRetryState.RESOLVED -> {
+                NetworkRetryState.RETRY -> setRetryUi()
+                NetworkRetryState.IDLE -> setIdleUi()
+                NetworkRetryState.NON -> {
+                    Log.i("TAG", "onCreateView: DISMISS")
                     dismiss()
                 }
             }
@@ -63,8 +57,8 @@ class NetworkErrorFragment : DialogFragment() {
     override fun onDestroyView() {
         Log.i("TAG", "onDestroyView: NetworkErrorFragment Destoryed")
         super.onDestroyView()
-        _binding = null
         networkErrorViewModel.retry.value = null
+        _binding = null
     }
 
     private fun setupFullScreenDialog(dialog: Dialog?) {
@@ -78,5 +72,15 @@ class NetworkErrorFragment : DialogFragment() {
             R.style.ThemeOverlay_MaterialComponents_MaterialCalendar_Fullscreen
         )
         dialog?.setCancelable(false)
+    }
+
+    private fun setIdleUi() {
+        binding.retryProgress.visibility = View.INVISIBLE
+        binding.retry.isEnabled = true
+    }
+
+    private fun setRetryUi() {
+        binding.retryProgress.visibility = View.VISIBLE
+        binding.retry.isEnabled = false
     }
 }

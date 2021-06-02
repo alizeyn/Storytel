@@ -11,5 +11,5 @@ import javax.inject.Inject
 class NetworkErrorViewModel @Inject constructor(application: Application) :
     AndroidViewModel(application) {
 
-    var retry: MutableLiveData<NetworkRetryState> = MutableLiveData()
+    var retry: MutableLiveData<NetworkRetryState> = MutableLiveData(NetworkRetryState.NON)
 }

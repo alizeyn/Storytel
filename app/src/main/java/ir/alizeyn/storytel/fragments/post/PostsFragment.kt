@@ -35,7 +35,6 @@ class PostsFragment : Fragment() {
     ): View {
 
         _binding = FragmentPostsBinding.inflate(inflater, container, false)
-        val view = binding.root
         setHasOptionsMenu(true)
         setupRecyclerView()
 
@@ -45,34 +44,36 @@ class PostsFragment : Fragment() {
 
         postsViewModel.posts.observe(viewLifecycleOwner, { response ->
             binding.progressBar.visibility = View.GONE
-            val errorState = networkErrorViewModel.retry.value
-
             when (response) {
+                is Response.Error -> {
+                    when (networkErrorViewModel.retry.value) {
+                        NetworkRetryState.ERROR ->
+                            networkErrorViewModel.retry.value = NetworkRetryState.RETRY
+                        NetworkRetryState.RETRY ->
+                            networkErrorViewModel.retry.value = NetworkRetryState.IDLE
+                        else ->
+                            networkErrorViewModel.retry.value = NetworkRetryState.ERROR
+                    }
+                }
                 is Response.Success -> {
                     response.data?.let {
                         adapter.updateData(it)
                     }
-                    if (errorState != null) {
-                        networkErrorViewModel.retry.value = NetworkRetryState.RESOLVED
-                    }
-                }
-                is Response.Error -> {
-                    if (errorState == null) {
-                        findNavController().navigate(R.id.action_postsFragment_to_networkErrorFragment)
-                    } else if (errorState == NetworkRetryState.RETRY) {
-                        networkErrorViewModel.retry.value = NetworkRetryState.IDLE
-                    }
+                    networkErrorViewModel.retry.value = NetworkRetryState.NON
                 }
             }
         })
 
         networkErrorViewModel.retry.observe(viewLifecycleOwner, {
-            if (it == NetworkRetryState.RETRY) {
-                postsViewModel.requestPosts()
+            when (it) {
+                NetworkRetryState.ERROR ->
+                    findNavController()
+                        .navigate(R.id.action_postsFragment_to_networkErrorFragment)
+                NetworkRetryState.RETRY -> postsViewModel.requestPosts()
             }
         })
 
-        return view
+        return binding.root
     }
 
     override fun onDestroyView() {
