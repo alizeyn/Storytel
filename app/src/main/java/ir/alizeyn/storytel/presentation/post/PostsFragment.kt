@@ -3,16 +3,13 @@ package ir.alizeyn.storytel.presentation.post
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ir.alizeyn.storytel.R
-import ir.alizeyn.storytel.databinding.FragmentPostsBinding
-import ir.alizeyn.storytel.data.network.NetworkRetryState
 import ir.alizeyn.storytel.data.network.model.Response
-import ir.alizeyn.storytel.presentation.network.NetworkErrorViewModel
+import ir.alizeyn.storytel.databinding.FragmentPostsBinding
+import ir.alizeyn.storytel.presentation.network.NetworkErrorDialog
 
 @AndroidEntryPoint
 class PostsFragment : Fragment() {
@@ -23,7 +20,6 @@ class PostsFragment : Fragment() {
     private val postsViewModel: PostsViewModel by navGraphViewModels(R.id.storytel_nav) {
         defaultViewModelProviderFactory
     }
-    private val networkErrorViewModel: NetworkErrorViewModel by activityViewModels()
 
     private val adapter: PostAdapter by lazy { PostAdapter() }
 
@@ -40,34 +36,31 @@ class PostsFragment : Fragment() {
             postsViewModel.requestPosts()
         }
 
+        val networkErrorDialog = NetworkErrorDialog(
+            requireContext()
+        ) {
+            postsViewModel.requestPosts()
+        }
+
         postsViewModel.posts.observe(viewLifecycleOwner, { response ->
             binding.progressBar.visibility = View.GONE
+
             when (response) {
-                is Response.Error -> {
-                    when (networkErrorViewModel.retry.value) {
-                        NetworkRetryState.ERROR ->
-                            networkErrorViewModel.retry.value = NetworkRetryState.RETRY
-                        NetworkRetryState.RETRY ->
-                            networkErrorViewModel.retry.value = NetworkRetryState.IDLE
-                        else ->
-                            networkErrorViewModel.retry.value = NetworkRetryState.ERROR
-                    }
-                }
                 is Response.Success -> {
                     response.data?.let {
                         adapter.updateData(it)
                     }
-                    networkErrorViewModel.retry.value = NetworkRetryState.NON
+                    if (networkErrorDialog.isShowing) {
+                        networkErrorDialog.dismiss()
+                    }
                 }
-            }
-        })
-
-        networkErrorViewModel.retry.observe(viewLifecycleOwner, {
-            when (it) {
-                NetworkRetryState.ERROR ->
-                    findNavController()
-                        .navigate(R.id.action_postsFragment_to_networkErrorFragment)
-                NetworkRetryState.RETRY -> postsViewModel.requestPosts()
+                is Response.Error -> {
+                    if (networkErrorDialog.isShowing) {
+                        networkErrorDialog.showIdleState()
+                    } else {
+                        networkErrorDialog.show()
+                    }
+                }
             }
         })
 
