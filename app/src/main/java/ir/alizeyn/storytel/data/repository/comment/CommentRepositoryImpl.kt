@@ -6,8 +6,9 @@ import ir.alizeyn.storytel.data.network.api.StorytelServiceApi
 import ir.alizeyn.storytel.data.network.model.Comment
 import ir.alizeyn.storytel.domain.StorytelComment
 import javax.inject.Inject
+import kotlin.math.min
 
-const val limit = 3
+private const val COMMENTS_SIZE_LIMIT = 3
 
 class CommentRepositoryImpl @Inject constructor(
     private val storytelApi: StorytelServiceApi,
@@ -15,10 +16,10 @@ class CommentRepositoryImpl @Inject constructor(
 ) : CommentRepository {
 
     override suspend fun getComments(postId: Int) = Call.safeCall {
-        //todo handle less comments than limited
+
+        val comments = storytelApi.getComments(postId)
         mapComments(
-            storytelApi.getComments(postId)
-                .subList(0, limit)
+            comments.subList(0, min(COMMENTS_SIZE_LIMIT, comments.size))
         )
     }
 
