@@ -38,7 +38,7 @@ class PostsFragment : Fragment() {
             postsViewModel.requestPosts()
         }
 
-        postsViewModel.posts.observe(viewLifecycleOwner, { response ->
+        postsViewModel.postList.observe(viewLifecycleOwner, { response ->
             binding.progressBar.visibility = View.GONE
 
             when (response) {

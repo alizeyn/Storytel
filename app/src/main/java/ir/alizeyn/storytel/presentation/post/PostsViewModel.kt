@@ -1,9 +1,6 @@
 package ir.alizeyn.storytel.presentation.post
 
-import androidx.lifecycle.LifecycleObserver
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.alizeyn.storytel.data.network.model.Response
 import ir.alizeyn.storytel.data.repository.post.PostRepository
@@ -16,7 +13,9 @@ class PostsViewModel @Inject constructor(
     private val repository: PostRepository
 ) : ViewModel(), LifecycleObserver {
 
-    var posts: MutableLiveData<Response<List<StorytelPost>>> = MutableLiveData()
+    private var posts: MutableLiveData<Response<List<StorytelPost>>> = MutableLiveData()
+    val postList: LiveData<Response<List<StorytelPost>>>
+    get() = posts
 
     init {
         requestPosts()
