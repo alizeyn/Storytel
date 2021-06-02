@@ -47,12 +47,12 @@ class NetworkErrorDialog(context: Context, private val retryAction: () -> Unit) 
         }
     }
 
-    public fun showProgressState() {
+    private fun showProgressState() {
         binding.retryProgress.visibility = View.VISIBLE
         binding.retry.isEnabled = false
     }
 
-    public fun showIdleState() {
+    fun showIdleState() {
         binding.retryProgress.visibility = View.INVISIBLE
         binding.retry.isEnabled = true
     }
