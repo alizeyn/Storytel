@@ -6,7 +6,6 @@ import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.view.View
-import android.view.ViewGroup
 import android.view.Window
 import android.view.WindowManager
 import ir.alizeyn.storytel.R
@@ -37,14 +36,6 @@ class NetworkErrorDialog(context: Context, private var retryAction: (() -> Unit)
             showProgressState()
             retryAction?.let { it() }
         }
-    }
-
-    override fun onStart() {
-        super.onStart()
-        window?.setLayout(
-            ViewGroup.LayoutParams.MATCH_PARENT,
-            ViewGroup.LayoutParams.MATCH_PARENT
-        )
     }
 
     override fun onDetachedFromWindow() {
