@@ -1,7 +1,7 @@
 package ir.alizeyn.storytel.data.map
 
-import ir.alizeyn.storytel.data.model.data.DataPost
-import ir.alizeyn.storytel.data.model.domain.StorytelPost
+import ir.alizeyn.storytel.domain.DataPost
+import ir.alizeyn.storytel.domain.StorytelPost
 import javax.inject.Inject
 
 class PostResponseMapper @Inject constructor() : Mapper<DataPost, StorytelPost> {

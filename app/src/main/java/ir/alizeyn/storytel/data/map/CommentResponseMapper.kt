@@ -1,7 +1,7 @@
 package ir.alizeyn.storytel.data.map
 
-import ir.alizeyn.storytel.data.model.domain.StorytelComment
-import ir.alizeyn.storytel.data.model.network.Comment
+import ir.alizeyn.storytel.domain.StorytelComment
+import ir.alizeyn.storytel.data.network.model.Comment
 import javax.inject.Inject
 
 class CommentResponseMapper @Inject constructor() : Mapper<Comment, StorytelComment> {

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/postsFragment"
-        android:name="ir.alizeyn.storytel.fragments.post.PostsFragment"
+        android:name="ir.alizeyn.storytel.presentation.post.PostsFragment"
         android:label="Storytel"
         tools:layout="@layout/fragment_posts">
         <action
@@ -23,7 +23,7 @@
     </fragment>
     <fragment
         android:id="@+id/commentsFragment"
-        android:name="ir.alizeyn.storytel.fragments.comment.CommentsFragment"
+        android:name="ir.alizeyn.storytel.presentation.comment.CommentsFragment"
         android:label="Comments"
         tools:layout="@layout/fragment_comments">
         <action
@@ -33,14 +33,14 @@
             app:exitAnim="@anim/from_left" />
         <argument
             android:name="currentPost"
-            app:argType="ir.alizeyn.storytel.data.model.domain.StorytelPost" />
+            app:argType="ir.alizeyn.storytel.domain.StorytelPost" />
         <action
             android:id="@+id/action_commentsFragment_to_networkErrorFragment"
             app:destination="@id/networkErrorFragment" />
     </fragment>
     <dialog
         android:id="@+id/networkErrorFragment"
-        android:name="ir.alizeyn.storytel.fragments.NetworkErrorFragment"
+        android:name="ir.alizeyn.storytel.presentation.network.NetworkErrorFragment"
         android:label="fragment_network_error"
         tools:layout="@layout/fragment_network_error" />
 </navigation>
