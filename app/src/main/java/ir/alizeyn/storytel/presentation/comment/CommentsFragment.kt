@@ -18,7 +18,6 @@ import ir.alizeyn.storytel.data.network.model.Response
 import ir.alizeyn.storytel.databinding.FragmentCommentsBinding
 import ir.alizeyn.storytel.domain.StorytelPost
 import ir.alizeyn.storytel.presentation.network.NetworkErrorViewModel
-import ir.alizeyn.storytel.presentation.post.PostsViewModel
 
 @AndroidEntryPoint
 class CommentsFragment : Fragment() {
@@ -28,7 +27,7 @@ class CommentsFragment : Fragment() {
     private var _binding: FragmentCommentsBinding? = null
     private val binding get() = _binding!!
 
-    private val postsViewModel: PostsViewModel by viewModels()
+    private val commentsViewModel: CommentsViewModel by viewModels()
     private val networkErrorViewModel: NetworkErrorViewModel by activityViewModels()
 
     private val adapter: CommentAdapter by lazy { CommentAdapter() }
@@ -46,9 +45,9 @@ class CommentsFragment : Fragment() {
         binding.postTitle.text = post.title
         binding.postBody.text = post.body
 
-        postsViewModel.requestComments(post.id)
+        commentsViewModel.requestComments(post.id)
 
-        postsViewModel.comments.observe(viewLifecycleOwner, { response ->
+        commentsViewModel.comments.observe(viewLifecycleOwner, { response ->
             binding.progressBar.visibility = View.INVISIBLE
             when (response) {
                 is Response.Success -> {
@@ -77,7 +76,7 @@ class CommentsFragment : Fragment() {
                         .navigate(R.id.action_commentsFragment_to_networkErrorFragment)
 
                 NetworkRetryState.RETRY -> {
-                    postsViewModel.requestComments(post.id)
+                    commentsViewModel.requestComments(post.id)
                     binding.postImage.load(post.imageUrl)
                 }
             }

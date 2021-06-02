@@ -1,4 +1,4 @@
-package ir.alizeyn.storytel.presentation.post
+package ir.alizeyn.storytel.presentation.comment
 
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.MutableLiveData
@@ -6,22 +6,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.alizeyn.storytel.data.network.model.Response
-import ir.alizeyn.storytel.data.repository.post.PostRepository
+import ir.alizeyn.storytel.data.repository.comment.CommentRepository
 import ir.alizeyn.storytel.domain.StorytelComment
-import ir.alizeyn.storytel.domain.StorytelPost
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class PostsViewModel @Inject constructor(
-    private val repository: PostRepository
+class CommentsViewModel @Inject constructor(
+    private val repository: CommentRepository
 ) : ViewModel(), LifecycleObserver {
 
-    var posts: MutableLiveData<Response<List<StorytelPost>>> = MutableLiveData()
     var comments: MutableLiveData<Response<List<StorytelComment>>> = MutableLiveData()
 
-
-    fun requestPosts() = viewModelScope.launch {
-        posts.value = repository.getPosts()
+    fun requestComments(postId: Int) = viewModelScope.launch {
+        comments.value = repository.getComments(postId, 3)
     }
 }
