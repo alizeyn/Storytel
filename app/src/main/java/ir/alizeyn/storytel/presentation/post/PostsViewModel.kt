@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.alizeyn.storytel.data.network.model.Response
 import ir.alizeyn.storytel.data.repository.post.PostRepository
-import ir.alizeyn.storytel.domain.StorytelComment
 import ir.alizeyn.storytel.domain.StorytelPost
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -18,8 +17,10 @@ class PostsViewModel @Inject constructor(
 ) : ViewModel(), LifecycleObserver {
 
     var posts: MutableLiveData<Response<List<StorytelPost>>> = MutableLiveData()
-    var comments: MutableLiveData<Response<List<StorytelComment>>> = MutableLiveData()
 
+    init {
+        requestPosts()
+    }
 
     fun requestPosts() = viewModelScope.launch {
         posts.value = repository.getPosts()

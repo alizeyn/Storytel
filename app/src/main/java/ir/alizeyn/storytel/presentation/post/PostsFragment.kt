@@ -32,10 +32,6 @@ class PostsFragment : Fragment() {
         setHasOptionsMenu(true)
         setupRecyclerView()
 
-        if (postsViewModel.posts.value == null) {
-            postsViewModel.requestPosts()
-        }
-
         val networkErrorDialog = NetworkErrorDialog(
             requireContext()
         ) {
