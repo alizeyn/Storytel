@@ -19,22 +19,25 @@ class NetworkErrorDialog(context: Context, private var retryAction: (() -> Unit)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        _binding = DialogNetworkErrorBinding.inflate(layoutInflater)
+        window?.requestFeature(Window.FEATURE_NO_TITLE)
+        setContentView(binding.root)
+        setCancelable(false)
+        setRetryAction {
+            showProgressState()
+            retryAction?.let { it() }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
         window?.apply {
-            requestFeature(Window.FEATURE_NO_TITLE)
             setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
             setBackgroundDrawable(ColorDrawable(Color.rgb(255, 255, 255)))
             setLayout(
                 WindowManager.LayoutParams.MATCH_PARENT,
                 WindowManager.LayoutParams.MATCH_PARENT
             )
-        }
-        _binding = DialogNetworkErrorBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        setCancelable(false)
-        setRetryAction {
-            showProgressState()
-            retryAction?.let { it() }
         }
     }
 
