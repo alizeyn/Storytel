@@ -15,6 +15,7 @@ object Call {
                 val result = apiCall.invoke()
                 Response.Success(result)
             } catch (throwable: Exception) {
+                throwable.printStackTrace()
                 Response.Error(throwable.message)
             }
         }

@@ -10,10 +10,10 @@ import kotlin.math.min
 
 private const val COMMENTS_SIZE_LIMIT = 3
 
-class CommentRepositoryImpl @Inject constructor(
+class CommentsRepositoryImpl @Inject constructor(
     private val storytelApi: StorytelServiceApi,
     private val commentDataMapper: Mapper<Comment, StorytelComment>
-) : CommentRepository {
+) : CommentsRepository {
 
     override suspend fun getComments(postId: Int) = Call.safeCall {
 

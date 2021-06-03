@@ -9,10 +9,10 @@ import ir.alizeyn.storytel.domain.DataPost
 import ir.alizeyn.storytel.domain.StorytelPost
 import javax.inject.Inject
 
-class PostRepositoryImpl @Inject constructor(
+class PostsRepositoryImpl @Inject constructor(
     private val storytelApi: StorytelServiceApi,
     private val postDataMapper: Mapper<DataPost, StorytelPost>
-) : PostRepository {
+) : PostsRepository {
 
     override suspend fun getPosts() = Call.safeCall {
         //todo use flow

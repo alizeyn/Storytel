@@ -3,14 +3,14 @@ package ir.alizeyn.storytel.presentation.post
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.HiltViewModel
 import ir.alizeyn.storytel.data.network.model.Response
-import ir.alizeyn.storytel.data.repository.post.PostRepository
+import ir.alizeyn.storytel.data.repository.post.PostsRepository
 import ir.alizeyn.storytel.domain.StorytelPost
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class PostsViewModel @Inject constructor(
-    private val repository: PostRepository
+    private val repository: PostsRepository
 ) : ViewModel(), LifecycleObserver {
 
     private var posts: MutableLiveData<Response<List<StorytelPost>>> = MutableLiveData()

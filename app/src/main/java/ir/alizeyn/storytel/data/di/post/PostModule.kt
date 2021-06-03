@@ -6,8 +6,8 @@ import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import ir.alizeyn.storytel.data.map.Mapper
 import ir.alizeyn.storytel.data.map.PostResponseMapper
-import ir.alizeyn.storytel.data.repository.post.PostRepository
-import ir.alizeyn.storytel.data.repository.post.PostRepositoryImpl
+import ir.alizeyn.storytel.data.repository.post.PostsRepository
+import ir.alizeyn.storytel.data.repository.post.PostsRepositoryImpl
 import ir.alizeyn.storytel.domain.DataPost
 import ir.alizeyn.storytel.domain.StorytelPost
 import javax.inject.Singleton
@@ -21,5 +21,5 @@ abstract class PostModule {
 
     @Binds
     @Singleton
-    abstract fun repository(repository: PostRepositoryImpl): PostRepository
+    abstract fun repository(repository: PostsRepositoryImpl): PostsRepository
 }

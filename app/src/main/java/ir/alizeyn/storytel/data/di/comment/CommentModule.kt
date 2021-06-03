@@ -7,8 +7,8 @@ import dagger.hilt.components.SingletonComponent
 import ir.alizeyn.storytel.data.map.CommentResponseMapper
 import ir.alizeyn.storytel.data.map.Mapper
 import ir.alizeyn.storytel.data.network.model.Comment
-import ir.alizeyn.storytel.data.repository.comment.CommentRepository
-import ir.alizeyn.storytel.data.repository.comment.CommentRepositoryImpl
+import ir.alizeyn.storytel.data.repository.comment.CommentsRepository
+import ir.alizeyn.storytel.data.repository.comment.CommentsRepositoryImpl
 import ir.alizeyn.storytel.domain.StorytelComment
 import javax.inject.Singleton
 
@@ -22,5 +22,5 @@ abstract class CommentModule {
 
     @Binds
     @Singleton
-    abstract fun repository(repository: CommentRepositoryImpl): CommentRepository
+    abstract fun repository(repository: CommentsRepositoryImpl): CommentsRepository
 }
