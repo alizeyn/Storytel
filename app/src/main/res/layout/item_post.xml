@@ -10,7 +10,7 @@
     android:layout_marginBottom="8dp"
     android:clickable="true"
     android:focusable="true"
-    app:cardElevation="4dp"
+    app:cardElevation="8dp"
     android:foreground="?selectableItemBackground"
     android:padding="4dp">
 
