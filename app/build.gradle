@@ -18,7 +18,7 @@ android {
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "ir.alizeyn.storytel.HiltTestRunner"
     }
 
     buildTypes {
@@ -85,14 +85,18 @@ dependencies {
     // TestImplementations
     testImplementation 'junit:junit:4.13.2'
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1"
+    testImplementation "org.robolectric:robolectric:4.5.1"
     testImplementation "com.google.truth:truth:1.1.2"
     testImplementation "org.mockito:mockito-inline:3.7.7"
 
-    // AndroidTestImpementations
+    // AndroidTestImplementations
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1"
     androidTestImplementation "com.google.truth:truth:1.1.2"
     androidTestImplementation "org.mockito:mockito-inline:3.7.7"
-
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.35'
+    androidTestAnnotationProcessor 'com.google.dagger:hilt-android-compiler:2.35'
+    debugImplementation 'androidx.fragment:fragment-testing:1.2.5'
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:3.3.0'
 }
