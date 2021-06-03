@@ -5,7 +5,6 @@ import ir.alizeyn.storytel.MainCoroutineRule
 import ir.alizeyn.storytel.data.map.PostResponseMapper
 import ir.alizeyn.storytel.data.network.FakeStorytelServiceApi
 import ir.alizeyn.storytel.data.network.api.StorytelServiceApi
-import ir.alizeyn.storytel.data.network.model.Photo
 import ir.alizeyn.storytel.data.network.model.Response
 import ir.alizeyn.storytel.domain.DataPost
 import ir.alizeyn.storytel.domain.StorytelPost
@@ -27,8 +26,6 @@ class PostsRepositoryImplTest {
     @Mock private lateinit var failedServiceApi: StorytelServiceApi
     @Mock private lateinit var mockPostMapper: PostResponseMapper
     @Mock private lateinit var mockDataPost: DataPost
-    @Mock private lateinit var photos: List<Photo>
-    @Mock private lateinit var photo: Photo
     @Mock private lateinit var mockStorytelPost: StorytelPost
 
     @ExperimentalCoroutinesApi

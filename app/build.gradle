@@ -87,12 +87,4 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1"
     testImplementation "com.google.truth:truth:1.1.2"
     testImplementation "org.mockito:mockito-inline:3.7.7"
-
-    // AndroidTestImpementations
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-    androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1"
-    androidTestImplementation "com.google.truth:truth:1.1.2"
-    androidTestImplementation "org.mockito:mockito-inline:3.7.7"
-
 }
