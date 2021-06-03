@@ -9,3 +9,4 @@ __Project stack in a nutshell__
 * Hilt
 * Retrofit
 * Coil
+* Mockito
