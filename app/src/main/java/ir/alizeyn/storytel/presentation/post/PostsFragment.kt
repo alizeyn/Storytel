@@ -3,7 +3,7 @@ package ir.alizeyn.storytel.presentation.post
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.navigation.navGraphViewModels
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import ir.alizeyn.storytel.R
@@ -17,9 +17,7 @@ class PostsFragment : Fragment() {
     private var _binding: FragmentPostsBinding? = null
     private val binding get() = _binding!!
 
-    private val postsViewModel: PostsViewModel by navGraphViewModels(R.id.storytel_nav) {
-        defaultViewModelProviderFactory
-    }
+    private val postsViewModel: PostsViewModel by viewModels()
 
     private val adapter: PostAdapter by lazy { PostAdapter() }
 
